@@ -1,51 +1,20 @@
-import pokeball from './pokeball.svg';
-import './App.css';
-import React,{useContext} from 'react';
-import {ThemeContext} from './Provider/Provider';
-import {theme} from './Theme/theme';
-import ThemeSwitch from './Theme/ThemeSwitch';
+import React from 'react'
+import {Route, Switch} from 'react-router-dom';
+import Pokedex from './pages/Pokedex';
+import Pokemon from './pages/Pokemon';
+import Start from './pages/Start';
 
-const getStyles = (mode)=>({
-  header: {
-    fontSize: 34,
-    fontWeight: "400"
-  },
-  app: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: theme[mode].backgroundColor
-  },
-  text: {
-    fontWeight: "200",
-    color: theme[mode].color
-  },
-  theme: {
-    color: theme[mode].highlight
-  }
-});
 
-function App() {
-  const {mode} = useContext(ThemeContext);
-  const styles = getStyles(mode);
-  return (
-    <div className="App" >
-      <header className="App-header" style={styles.app}>
-        <img src={pokeball} className="App-logo" alt="logo" />
-        <p  style={styles.text}>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <ThemeSwitch />
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <Switch>
+           <Route exact path="/">
+            <Start />
+            </Route>
+            <Route exact path="/pokedex" render={(props) => <Pokedex {...props}/>} />
+            <Route exact path="/pokedex/pokemon/:pokemonId" render={(props)=> <Pokemon {...props}/>} />
+        </Switch>
+    )
 }
 
-export default App;
+export default App
