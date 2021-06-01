@@ -1,30 +1,27 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import {useParams } from "react-router-dom";
-import {mookData} from '../mookData';
 import NavBar from '../components/NavBar';
-import {firstCharUpperCase} from '../constants/firstCharUpperCase'
+import PokemonItem from '../components/PokemonItem';
+
 const Pokemon = () => {
     let {pokemonId} = useParams();
-    const [pokemonData] = useState(mookData[pokemonId]);
-    const {name, id, species, height, weight, types} = pokemonData;
-    const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+    const [pokemonData, setPokemonData] = useState(undefined);
+
+    useEffect(() => {
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+        .then(resp =>{
+            setPokemonData(resp.data);
+        })
+    }, [pokemonId])
+    
+
     return (
         <>
             <NavBar />
-            <div className="card">
-                <div className="card-body">
-                    <h3 className="card-title">{firstCharUpperCase(name)}</h3>
-                    <p>#{id}</p>
-                    <img className="card-img-top" src={fullImageUrl} alt={name}/>
-                    <p className="card-text">Types: </p>
-                    {types.map(type=>{
-                        return <p key={type.type.name}> - {type.type.name}</p>
-                    })} 
-                    <p className="card-text">Species: {species.name}</p>
-                    <p className="card-text">Heigtht: {height}</p>
-                    <p className="card-text">Weight: {weight}</p>
-                </div>
-            </div>
+           {pokemonData === undefined && <h1>Loading...</h1>}
+           {pokemonData !== undefined && pokemonData && <PokemonItem pokemonData={pokemonData}/>}
+           {pokemonData === false && <h1>Pokemon not found</h1>}
         </>
     )
 }

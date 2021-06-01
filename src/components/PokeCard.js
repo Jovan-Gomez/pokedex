@@ -2,8 +2,7 @@ import React from 'react'
 import {firstCharUpperCase} from '../constants/firstCharUpperCase'
 
 const PokeCard = ({pokemonId, pokemonData, history}) => {
-    const {id, name} = pokemonData[pokemonId];
-    const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    const {id, name, sprite} = pokemonData[pokemonId];
     return (
         <div className="col card m-3" style={{width: '18rem', height: '18rem'}} onClick={()=> history.push(`/pokedex/pokemon/${pokemonId}`)}>
         <img src={sprite} className="card-img-to" alt={name}/>
