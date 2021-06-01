@@ -1,24 +1,48 @@
 import React from 'react'
-import {firstCharUpperCase} from '../constants/firstCharUpperCase'
+import {firstCharUpperCase} from '../constants/firstCharUpperCase';
 
 const PokemonItem = ({pokemonData}) => {
-    const {name, id, species, height, weight, types} = pokemonData;
+    const {name, id, height, weight, types, order, abilities, moves} = pokemonData;
     const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
     return (
-        <div className="card">
             <div className="card-body">
                 <h3 className="card-title">{firstCharUpperCase(name)}</h3>
                 <p>#{id}</p>
                 <img className="card-img-top" src={fullImageUrl} alt={name}/>
-                <p className="card-text">Types: </p>
-                {types.map(type=>{
-                    return <p key={type.type.name}> - {type.type.name}</p>
-                })} 
-                <p className="card-text">Species: {species.name}</p>
-                <p className="card-text">Heigtht: {height}</p>
-                <p className="card-text">Weight: {weight}</p>
+                <div className="text-center">
+                    {types.map(type=>{
+                        return <span key={type.type.name} className="badge rounded-pill bg-danger">{`${type.type.name}`}</span>
+                    })}
+                </div>
+                <div className="card mt-3">
+                <h3 className="card-header">About</h3>
+                    <div className="card-body row">
+                        <div className="col">
+                            <p>Height: <span className="badge rounded-pill bg-danger">{height}</span></p>
+                            <p>Weight: <span className="badge rounded-pill bg-danger">{weight}</span></p>
+                            <p>Order: <span className="badge rounded-pill bg-danger">{order}</span></p>
+                        </div>
+                        <div className="col">
+                            <h4>Abilities</h4>
+                            {
+                                abilities.map(ability=>{
+                                    return <span key={ability.ability.name} className="badge rounded-pill bg-danger">{`${ability.ability.name}`}</span>
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className="card mt-3">
+                <h3 className="card-header">Moves</h3>
+                    <div className="card-body">
+                        {
+                            moves.map(move =>{
+                                return <span key={move.move.name} className="badge rounded-pill bg-danger">{`${move.move.name}`}</span>
+                            })
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
     )
 }
 

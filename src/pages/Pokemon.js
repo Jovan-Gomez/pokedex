@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react'
 import {useParams } from "react-router-dom";
 import NavBar from '../components/NavBar';
 import PokemonItem from '../components/PokemonItem';
-
+import { useHistory } from "react-router-dom";
 const Pokemon = () => {
     let {pokemonId} = useParams();
+    let history = useHistory();
     const [pokemonData, setPokemonData] = useState(undefined);
 
     useEffect(() => {
@@ -19,9 +20,13 @@ const Pokemon = () => {
     return (
         <>
             <NavBar />
-           {pokemonData === undefined && <h1>Loading...</h1>}
-           {pokemonData !== undefined && pokemonData && <PokemonItem pokemonData={pokemonData}/>}
+           {pokemonData === undefined && <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>}
+           {pokemonData !== undefined && pokemonData && <PokemonItem pokemonData={pokemonData} history={history}/>}
            {pokemonData === false && <h1>Pokemon not found</h1>}
+           <div className="d-flex justify-content-between">
+            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex`)}><i class="bi bi-arrow-left-circle"></i></button>
+            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex/pokemon/${pokemonId}/encounters`)}><i class="bi bi-eye"></i> View Encounters</button>
+           </div>
         </>
     )
 }

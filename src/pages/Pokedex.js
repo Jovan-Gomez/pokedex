@@ -9,7 +9,6 @@ const Pokedex = () => {
     const [pokemonData, setPokemonData] = useState({});
     const [filterName, setFilterName] = useState("");
 
-
     useEffect(()=>{
         axios.get('https://pokeapi.co/api/v2/pokemon?limit=898')
         .then(resp =>{
@@ -25,6 +24,8 @@ const Pokedex = () => {
             setPokemonData(newPokemon);
         })
     }, []);
+
+
     const handleSearchName = (e)=>setFilterName(lowerCase(e.target.value));
     return (
           <>
@@ -46,9 +47,9 @@ const Pokedex = () => {
                             <select className="form-select">
                                 <option disabled>All Types</option>
                             </select>
-                            <select className="form-select">
-                                <option value={4}>4</option>
-                                <option value={8}>8</option>
+                            <select className="form-select" >
+                                <option value={4} >4</option>
+                                <option value={8} >8</option>
                                 <option value={12}>12</option>
                                 <option value={16}>16</option>
                                 <option value={20}>20</option>
