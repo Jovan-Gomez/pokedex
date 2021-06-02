@@ -1,10 +1,11 @@
 import pokeball from '../pokeball.svg';
 import '../App.css';
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import {ThemeContext} from '../Provider/Provider';
 import {theme} from '../Theme/theme';
 import ThemeSwitch from '../Theme/ThemeSwitch';
-import {Link} from 'react-router-dom';
+import { useAuth } from '../Provider/AuthProvider';
+import { useHistory } from 'react-router';
 
 
 const getStyles = (mode)=>({
@@ -27,8 +28,20 @@ const getStyles = (mode)=>({
 });
 
 function Start() {
+  const [couchName, setCouchName] = useState("");
   const {mode} = useContext(ThemeContext);
   const styles = getStyles(mode);
+  const {signIn, user} =  useAuth();
+  const history = useHistory();
+  const handleCouchName = (e)=>setCouchName((e.target.value));
+  localStorage.user = user;
+  const onSubmit = (e)=>{
+    e.preventDefault();
+    signIn(()=>{
+      localStorage.setItem('user', couchName);
+      history.push('/pokedex');
+    }, couchName)
+  }
   return (
     <div className="App"  style={styles.app}>
         <div className="d-flex justify-content-end">
@@ -39,9 +52,12 @@ function Start() {
         <p  style={styles.text} className="lead">
           Welcome to the <code>Pokedex</code> App
         </p>
-          <Link to="/pokedex" className="btn btn-outline-danger">
-           Enter
-          </Link>
+        <form onSubmit={onSubmit}>
+        <div className="input-group">
+          <input className="form-control w-50" onChange={handleCouchName}/>
+        </div>
+        <p className="form-text">Write your couch name</p>
+        </form>
       </header>
     </div>
   );

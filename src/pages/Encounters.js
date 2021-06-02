@@ -32,12 +32,12 @@ const Encounters = ({history}) => {
     return (
         <>
             <NavBar />
-            {encountersData === undefined && <div class="spinner-border" role="status">
-                                                <span class="visually-hidden">Loading...</span>
+            {encountersData === undefined && <div className="spinner-border" role="status">
+                                                <span className="visually-hidden">Loading...</span>
                                             </div>}
             {encountersData !== undefined && encountersData && <PokemonEncounters encountersData={encountersData} pokemonData={pokemonData}/>}
             {encountersData === false && <h1>Encounters not found</h1>}
-            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex/pokemon/${pokemonId}`)}><i class="bi bi-arrow-left-circle"></i></button>
+            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex/pokemon/${pokemonId}`)}><i className="bi bi-arrow-left-circle"></i></button>
         </>
     )
 }

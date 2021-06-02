@@ -8,13 +8,17 @@ const PokemonItem = ({pokemonData}) => {
             <div className="card-body">
                 <h3 className="card-title">{firstCharUpperCase(name)}</h3>
                 <p>#{id}</p>
-                <img className="card-img-top" src={fullImageUrl} alt={name}/>
+                <div className="d-flex justify-content-center">
+                <img className="card-img-top" src={fullImageUrl} alt={name} style={{maxWidth: '25rem'}}/>
+                </div>
                 <div className="text-center">
                     {types.map(type=>{
                         return <span key={type.type.name} className="badge rounded-pill bg-danger">{`${type.type.name}`}</span>
                     })}
                 </div>
-                <div className="card mt-3">
+                <div className="d-flex justify-content-center flex-wrap">
+
+                <div className="card mt-3 w-100" style={{maxWidth: '50rem'}}>
                 <h3 className="card-header">About</h3>
                     <div className="card-body row">
                         <div className="col">
@@ -32,7 +36,7 @@ const PokemonItem = ({pokemonData}) => {
                         </div>
                     </div>
                 </div>
-                <div className="card mt-3">
+                <div className="card mt-3 w-100"  style={{maxWidth: '50rem'}}>
                 <h3 className="card-header">Moves</h3>
                     <div className="card-body">
                         {
@@ -41,6 +45,7 @@ const PokemonItem = ({pokemonData}) => {
                             })
                         }
                     </div>
+                </div>
                 </div>
             </div>
     )

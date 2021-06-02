@@ -1,6 +1,6 @@
 import {createContext, useContext, useState} from 'react';
 
-const authContext = createContext();
+export const authContext = createContext();
 
 const fakeAuthService = {
     login: (cb)=>{

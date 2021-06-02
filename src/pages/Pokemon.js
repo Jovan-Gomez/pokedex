@@ -20,12 +20,12 @@ const Pokemon = () => {
     return (
         <>
             <NavBar />
-           {pokemonData === undefined && <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>}
+           {pokemonData === undefined && <div className="spinner-border" role="status"><span className="visually-hidden">Loading...</span></div>}
            {pokemonData !== undefined && pokemonData && <PokemonItem pokemonData={pokemonData} history={history}/>}
            {pokemonData === false && <h1>Pokemon not found</h1>}
            <div className="d-flex justify-content-between">
-            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex`)}><i class="bi bi-arrow-left-circle"></i></button>
-            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex/pokemon/${pokemonId}/encounters`)}><i class="bi bi-eye"></i> View Encounters</button>
+            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex`)}><i className="bi bi-arrow-left-circle"></i></button>
+            <button className="btn btn-primary" onClick={()=> history.push(`/pokedex/pokemon/${pokemonId}/encounters`)}><i className="bi bi-eye"></i> View Encounters</button>
            </div>
         </>
     )

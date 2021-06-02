@@ -8,13 +8,13 @@ import ThemeProvider from './Provider/Provider'
 import {ProviderAuth} from './Provider/AuthProvider';
 
 ReactDOM.render(
-  <ThemeProvider>
-      <React.StrictMode>
      <ProviderAuth>
+      <ThemeProvider>
+      <React.StrictMode>
         <App />
-     </ProviderAuth>
       </React.StrictMode>
-  </ThemeProvider>,
+     </ThemeProvider>
+     </ProviderAuth>,
   document.getElementById('root')
 );
 
