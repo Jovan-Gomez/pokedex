@@ -10,7 +10,7 @@ const PokemonEncounters = ({encountersData, pokemonData}) => {
                 <p>#{pokemonData?.id}</p>                    
                     <div className="d-flex flex-column align-items-center">
                 <img className="card-img-top" src={fullImageUrl} alt={pokemonData?.name} style={{maxWidth: '15rem'}}/>
-                        <div className="card w-50">
+                        <div className="card w-100" style={{maxWidth: '50rem'}}>
                             <h4 className="card-header">Encounters</h4>
                             {
                                 Object.entries(encountersData).length ?
